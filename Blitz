@@ -1,4 +1,5 @@
 loadstring(game:HttpGet("https://you.whimper.xyz/blitz"))()
+
 print("-- Blitz Premiun Keyless Executed! --")
 
 game:GetService("StarterGui"):SetCore("SendNotification", {Title = "Loaded", Text = "press Q to auto aim"})
@@ -7,6 +8,8 @@ local UserInputService = game:GetService("UserInputService")
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local Camera = workspace.CurrentCamera
+
+print("-- FTAP Aimbot Executed! --")
 
 -- Settings
 local Settings = {
@@ -51,7 +54,7 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
         aimAt(closestPlayer)
     end
 end)
-print("-- FTAP Aimbot Executed! --")
+print("-- Chat Spy Executed! --")
 
 -- Config
 Config = {
