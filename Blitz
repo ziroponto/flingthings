@@ -1,6 +1,10 @@
+print("-- Blitz Premiun Keyless Executed! --")
 loadstring(game:HttpGet("https://you.whimper.xyz/blitz"))()
 
-print("-- Blitz Premiun Keyless Executed! --")
+print("-- Chat Spy Executed! --")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ziroponto/chat-spy/refs/heads/main/Chat%20Spy"))()
+
+print("-- FTAP Aimbot Executed! --")
 
 game:GetService("StarterGui"):SetCore("SendNotification", {Title = "Loaded", Text = "press Q to auto aim"})
 
@@ -54,73 +58,3 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
         aimAt(closestPlayer)
     end
 end)
-print("-- Chat Spy Executed! --")
-
--- Config
-Config = {
-\tenabled = true,
-\tspyOnMyself = true,
-\tpublic = false,
-\tpublicItalics = true
-}
- 
--- Customizing Log Output
-PrivateProperties = {
-\tColor = Color3.fromRGB(0,255,255); 
-\tFont = Enum.Font.SourceSansBold;
-\tTextSize = 18;
-}
- 
-\tlocal StarterGui = game:GetService("StarterGui")
-\tlocal Players = game:GetService("Players")
-\tlocal player = Players.LocalPlayer
-\tlocal saymsg = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
-\tlocal getmsg = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("OnMessageDoneFiltering")
-\tlocal instance = (_G.chatSpyInstance or 0) + 1
-\t_G.chatSpyInstance = instance
- 
-\tlocal function onChatted(p,msg)
-\t\tif _G.chatSpyInstance == instance then
-\t\t\tif p==player and msg:lower():sub(1,4)=="/spy" then
-\t\t\t\tConfig.enabled = not Config.enabled
-\t\t\t\twait(0.3)
-\t\t\t\tPrivateProperties.Text = "{SPY "..(Config.enabled and "EN" or "DIS").."ABLED}"
-\t\t\t\tStarterGui:SetCore("ChatMakeSystemMessage", PrivateProperties)
-\t\t\telseif Config.enabled and (Config.spyOnMyself==true or p~=player) then
-\t\t\t\tmsg = msg:gsub("[\
-\
-]",''):gsub("\\t",' '):gsub("[ ]+",' ')
-\t\t\t\tlocal hidden = true
-\t\t\t\tlocal conn = getmsg.OnClientEvent:Connect(function(packet,channel)
-\t\t\t\t\tif packet.SpeakerUserId==p.UserId and packet.Message==msg:sub(#msg-#packet.Message+1) and (channel=="All" or (channel=="Team" and Config.public==false and Players[packet.FromSpeaker].Team==player.Team)) then
-\t\t\t\t\t\thidden = false
-\t\t\t\t\tend
-\t\t\t\tend)
-\t\t\t\twait(1)
-\t\t\t\tconn:Disconnect()
-\t\t\t\tif hidden and Config.enabled then
-\t\t\t\t\tif Config.public then
-\t\t\t\t\t\tsaymsg:FireServer((Config.publicItalics and "/me " or '').."{SPY} [".. p.Name .."]: "..msg,"All")
-\t\t\t\t\telse
-\t\t\t\t\t\tPrivateProperties.Text = "{SPY} [".. p.Name .."]: "..msg
-\t\t\t\t\t\tStarterGui:SetCore("ChatMakeSystemMessage", PrivateProperties)
-\t\t\t\t\tend
-\t\t\t\tend
-\t\t\tend
-\t\tend
-\tend
- 
-\tfor _,p in ipairs(Players:GetPlayers()) do
-\t\tp.Chatted:Connect(function(msg) onChatted(p,msg) end)
-\tend
- 
-\tPlayers.PlayerAdded:Connect(function(p)
-\t\tp.Chatted:Connect(function(msg) onChatted(p,msg) end)
-\tend)
- 
-\tPrivateProperties.Text = "{SPY "..(Config.enabled and "EN" or "DIS").."ABLED}"
-\tStarterGui:SetCore("ChatMakeSystemMessage", PrivateProperties)
-\tlocal chatFrame = player.PlayerGui.Chat.Frame
-\tchatFrame.ChatChannelParentFrame.Visible = true
-\tchatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Position+UDim2.new(UDim.new(),chatFrame.ChatChannelParentFrame.Size.Y)
-print("-- Chat Spy Executed! --")
